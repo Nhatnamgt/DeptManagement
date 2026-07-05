@@ -1,0 +1,206 @@
+﻿@page
+@model DeptManagement.RazorPage.Pages.QuanLiNapRut.NaprutModel
+@{
+    ViewData["Title"] = "Quản lý nạp rút";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Quản lý nạp rút</h2>
+    <button type="button" class="btn btn-primary" id="btnAdd">
+        <span>+ Thêm giao dịch</span>
+    </button>
+</div>
+
+<div id="alertBox"></div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Ngày nạp</th>
+                <th>Số tiền nạp</th>
+                <th>Ngày rút</th>
+                <th>Số tiền rút</th>
+                <th>Lãi/Lỗ</th>
+                <th class="text-end" style="width: 160px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr>
+                <td colspan="7" class="text-center text-muted py-4">Đang tải dữ liệu...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Thêm giao dịch</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="itemId" value="0" />
+                <div class="mb-3">
+                    <label for="ngayNap" class="form-label">Ngày nạp</label>
+                    <input type="date" class="form-control" id="ngayNap" />
+                </div>
+                <div class="mb-3">
+                    <label for="soTienNap" class="form-label">Số tiền nạp</label>
+                    <input type="number" class="form-control" id="soTienNap" min="0" step="1000" value="0" />
+                </div>
+                <div class="mb-3">
+                    <label for="ngayRut" class="form-label">Ngày rút</label>
+                    <input type="date" class="form-control" id="ngayRut" />
+                </div>
+                <div class="mb-3">
+                    <label for="soTienRut" class="form-label">Số tiền rút</label>
+                    <input type="number" class="form-control" id="soTienRut" min="0" step="1000" value="0" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="btnSave">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const API_BASE = '@Model.ApiBaseUrl';
+        const API_URL = `${API_BASE}/QuanLiNapRut`;
+        const formModal = new bootstrap.Modal(document.getElementById('formModal'));
+
+        function showAlert(message, type = 'success') {
+            document.getElementById('alertBox').innerHTML =
+                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>`;
+        }
+
+        function formatMoney(value) {
+            return Number(value || 0).toLocaleString('vi-VN');
+        }
+
+        function formatDate(value) {
+            if (!value) return '-';
+            return value;
+        }
+
+        async function loadData() {
+            const tbody = document.getElementById('tableBody');
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Không thể tải dữ liệu');
+                const data = await response.json();
+
+                if (!data.length) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Chưa có giao dịch nào</td></tr>';
+                    return;
+                }
+
+                tbody.innerHTML = data.map(item => `
+                    <tr>
+                        <td>${item.id}</td>
+                        <td>${formatDate(item.ngayNap)}</td>
+                        <td>${formatMoney(item.soTienNap)}</td>
+                        <td>${formatDate(item.ngayRut)}</td>
+                        <td>${formatMoney(item.soTienRut)}</td>
+                        <td class="${item.laiLo >= 0 ? 'text-success' : 'text-danger'}">${formatMoney(item.laiLo)}</td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary me-1" onclick="openEdit(${item.id})">Sửa</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(${item.id})">Xóa</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center text-danger py-4">${error.message}</td></tr>`;
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('itemId').value = '0';
+            document.getElementById('ngayNap').value = '';
+            document.getElementById('soTienNap').value = '0';
+            document.getElementById('ngayRut').value = '';
+            document.getElementById('soTienRut').value = '0';
+            document.getElementById('modalTitle').textContent = 'Thêm giao dịch';
+        }
+
+        document.getElementById('btnAdd').addEventListener('click', () => {
+            resetForm();
+            formModal.show();
+        });
+
+        async function openEdit(id) {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Không thể tải dữ liệu');
+                const data = await response.json();
+                const item = data.find(x => x.id === id);
+                if (!item) throw new Error('Không tìm thấy giao dịch');
+
+                document.getElementById('itemId').value = item.id;
+                document.getElementById('ngayNap').value = item.ngayNap || '';
+                document.getElementById('soTienNap').value = item.soTienNap;
+                document.getElementById('ngayRut').value = item.ngayRut || '';
+                document.getElementById('soTienRut').value = item.soTienRut;
+                document.getElementById('modalTitle').textContent = 'Sửa giao dịch';
+                formModal.show();
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        }
+
+        document.getElementById('btnSave').addEventListener('click', async () => {
+            const id = parseInt(document.getElementById('itemId').value, 10);
+            const payload = {
+                id: id,
+                ngayNap: document.getElementById('ngayNap').value || null,
+                soTienNap: parseFloat(document.getElementById('soTienNap').value) || 0,
+                ngayRut: document.getElementById('ngayRut').value || null,
+                soTienRut: parseFloat(document.getElementById('soTienRut').value) || 0,
+                laiLo: 0
+            };
+
+            const isEdit = id > 0;
+            try {
+                const response = await fetch(API_URL, {
+                    method: isEdit ? 'PUT' : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const err = await response.text();
+                    throw new Error(err || 'Lưu thất bại');
+                }
+
+                formModal.hide();
+                showAlert(isEdit ? 'Cập nhật thành công' : 'Thêm mới thành công');
+                await loadData();
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        });
+
+        async function deleteItem(id) {
+            if (!confirm('Bạn có chắc muốn xóa giao dịch này?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Xóa thất bại');
+                showAlert('Xóa thành công');
+                await loadData();
+            } catch (error) {
+                showAlert(error.message, 'danger');
+            }
+        }
+
+        loadData();
+    </script>
+}
