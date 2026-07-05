@@ -1,0 +1,15 @@
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\bin\Debug\net8.0\DeptManagement.Repository.deps.json
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\bin\Debug\net8.0\DeptManagement.Repository.runtimeconfig.json
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\bin\Debug\net8.0\DeptManagement.Repository.dll
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\bin\Debug\net8.0\DeptManagement.Repository.pdb
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.csproj.AssemblyReference.cache
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.AssemblyInfoInputs.cache
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.AssemblyInfo.cs
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.csproj.CoreCompileInputs.cache
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.sourcelink.json
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.dll
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\refint\DeptManagement.Repository.dll
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.pdb
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\DeptManagement.Repository.genruntimeconfig.cache
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.Repository\obj\Debug\net8.0\ref\DeptManagement.Repository.dll

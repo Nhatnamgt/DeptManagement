@@ -1,0 +1,208 @@
+[
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "GetAll",
+    "RelativePath": "api/ChiTietKhoanVay",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "Create",
+    "RelativePath": "api/ChiTietKhoanVay",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.ChiTietKhoanVayDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "Update",
+    "RelativePath": "api/ChiTietKhoanVay",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.ChiTietKhoanVayDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "Delete",
+    "RelativePath": "api/ChiTietKhoanVay/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "GetByKhoanNoId",
+    "RelativePath": "api/ChiTietKhoanVay/KhoanNo/{khoanNoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "khoanNoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.ChiTietKhoanVayController",
+    "Method": "GetTongTienByKhoanNoId",
+    "RelativePath": "api/ChiTietKhoanVay/ThongKe/{khoanNoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "khoanNoId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiKhoanNoController",
+    "Method": "GetAll",
+    "RelativePath": "api/QuanLiKhoanNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiKhoanNoController",
+    "Method": "Create",
+    "RelativePath": "api/QuanLiKhoanNo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.UpdateQuanLiKhoanNoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiKhoanNoController",
+    "Method": "Update",
+    "RelativePath": "api/QuanLiKhoanNo",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.UpdateQuanLiKhoanNoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiKhoanNoController",
+    "Method": "Delete",
+    "RelativePath": "api/QuanLiKhoanNo/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiNapRutController",
+    "Method": "GetAll",
+    "RelativePath": "api/QuanLiNapRut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiNapRutController",
+    "Method": "Create",
+    "RelativePath": "api/QuanLiNapRut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.CreateEditQuanLiNapRutDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiNapRutController",
+    "Method": "Update",
+    "RelativePath": "api/QuanLiNapRut",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DeptManagement.Service.DTO.CreateEditQuanLiNapRutDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DeptManagement.Controllers.QuanLiNapRutController",
+    "Method": "Delete",
+    "RelativePath": "api/QuanLiNapRut/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
