@@ -25,7 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>options.UseNpgsql(builder.
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowFrontend", policy =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
@@ -35,7 +35,9 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors();
+app.UseRouting();
+
+app.UseCors("AllowFrontend");
 
 app.MapGet("/", () => Results.Redirect("/swagger"));
 
