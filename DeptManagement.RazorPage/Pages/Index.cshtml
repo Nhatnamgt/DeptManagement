@@ -1,2 +1,27 @@
 @page
-@model DeptManagement.RazorPage.Pages.IndexModel
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <a class="text-decoration-none text-dark" asp-page="/QuanLyKhoanVay/Khoanvay">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Quản lý khoản vay</h5>
+                    <p class="card-text text-muted mb-0">Xem danh sách khoản nợ và chi tiết khoản vay.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="text-decoration-none text-dark" asp-page="/QuanLiNapRut/Naprut">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Quản lý nạp rút</h5>
+                    <p class="card-text text-muted mb-0">Theo dõi các giao dịch nạp, rút và lãi lỗ.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
