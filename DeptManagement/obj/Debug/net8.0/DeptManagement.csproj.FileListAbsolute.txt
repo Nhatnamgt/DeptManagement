@@ -175,3 +175,4 @@ C:\Users\nhatn\Desktop\DeptManagement\DeptManagement\bin\Debug\net8.0\DeptManage
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement\bin\Debug\net8.0\DeptManagement.Service.pdb
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement\bin\Debug\net8.0\Npgsql.dll
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

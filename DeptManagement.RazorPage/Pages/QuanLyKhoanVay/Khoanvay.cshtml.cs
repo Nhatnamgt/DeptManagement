@@ -15,8 +15,7 @@ namespace DeptManagement.RazorPage.Pages.QuanLyKhoanVay
 
         public void OnGet()
         {
-            ApiBaseUrl = _configuration["ApiSettings:BaseUrl"]
-                ?? "https://deptmanagement.onrender.com/api";
+            ApiBaseUrl = ApiUrlHelper.GetBaseUrl(_configuration);
         }
     }
 }

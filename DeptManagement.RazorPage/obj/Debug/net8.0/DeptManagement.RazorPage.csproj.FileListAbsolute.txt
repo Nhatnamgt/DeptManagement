@@ -31,3 +31,4 @@ C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.RazorPage\obj\Debug\net8.0\
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.RazorPage\obj\Debug\net8.0\DeptManagement.RazorPage.pdb
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.RazorPage\obj\Debug\net8.0\DeptManagement.RazorPage.genruntimeconfig.cache
 C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.RazorPage\obj\Debug\net8.0\ref\DeptManagement.RazorPage.dll
+C:\Users\nhatn\Desktop\DeptManagement\DeptManagement.RazorPage\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

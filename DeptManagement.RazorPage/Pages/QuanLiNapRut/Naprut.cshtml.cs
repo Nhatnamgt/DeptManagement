@@ -15,8 +15,7 @@ namespace DeptManagement.RazorPage.Pages.QuanLiNapRut
 
         public void OnGet()
         {
-            ApiBaseUrl = _configuration["ApiSettings:BaseUrl"]
-                ?? "https://deptmanagement.onrender.com/api";
+            ApiBaseUrl = ApiUrlHelper.GetBaseUrl(_configuration);
         }
     }
 }
