@@ -41,6 +41,8 @@ namespace DeptManagement.Service.Service
                 NgayVay = x.Ngayvay,
                 SoTienVay = x.Sotienvay,
                 SoTienLai = x.Sotienlai,
+                SoTienTraMoiThang = x.Sotientramoiky,
+                NgayDenHan = x.Songaytra,
                 TongTien = x.Tongtien
             }).ToList();
         }
@@ -56,6 +58,8 @@ namespace DeptManagement.Service.Service
                 NgayVay = x.Ngayvay,
                 SoTienVay = x.Sotienvay,
                 SoTienLai = x.Sotienlai,
+                SoTienTraMoiThang = x.Sotientramoiky,
+                NgayDenHan = x.Songaytra,
                 TongTien = x.Tongtien
             }).ToList();
         }
@@ -67,7 +71,9 @@ namespace DeptManagement.Service.Service
                 Khoannoid = dto.KhoanNoId,
                 Ngayvay = dto.NgayVay,
                 Sotienvay = dto.SoTienVay,
-                Sotienlai = dto.SoTienLai
+                Sotienlai = dto.SoTienLai,
+                Sotientramoiky = dto.SoTienTraMoiThang,
+                Songaytra = dto.NgayDenHan
             };
 
             await _unitOfWork.ChiTietKhoanVayRepository.AddAsync(entity);
@@ -90,6 +96,8 @@ namespace DeptManagement.Service.Service
             entity.Ngayvay = dto.NgayVay;
             entity.Sotienvay = dto.SoTienVay;
             entity.Sotienlai = dto.SoTienLai;
+            entity.Sotientramoiky = dto.SoTienTraMoiThang;
+            entity.Songaytra = dto.NgayDenHan;  
 
             await _unitOfWork.ChiTietKhoanVayRepository.UpdateAsync(entity);
             await _unitOfWork.SaveAsync();

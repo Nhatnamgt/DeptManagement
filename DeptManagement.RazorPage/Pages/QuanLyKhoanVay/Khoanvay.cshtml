@@ -1,4 +1,4 @@
-﻿@page
+﻿ @page
 @model DeptManagement.RazorPage.Pages.QuanLyKhoanVay.IndexModel
 @{
     ViewData["Title"] = "Quản lý khoản vay";
@@ -69,8 +69,8 @@
                         <th>Ngày vay</th>
                         <th>Số tiền vay</th>
                         <th>Số tiền lãi</th>
-                        <th>Số tiền trả/kỳ</th>
-                        <th>Số ngày trả</th>
+                        <th>Số tiền trả mỗi tháng</th>
+                        <th>Ngày Đến Hạn</th>
                         <th>Tổng tiền</th>
                         <th class="text-end" style="width: 140px;">Thao tác</th>
                     </tr>
@@ -135,11 +135,11 @@
                         <input type="number" class="form-control" id="soTienLai" min="0" step="1000" value="0" />
                     </div>
                     <div class="col-md-6">
-                        <label for="soTienTraMoiKy" class="form-label">Số tiền trả mỗi kỳ</label>
+                        <label for="soTienTraMoiKy" class="form-label">Số tiền trả mỗi tháng</label>
                         <input type="number" class="form-control" id="soTienTraMoiKy" min="0" step="1000" value="0" />
                     </div>
                     <div class="col-md-6">
-                        <label for="soNgayTra" class="form-label">Số ngày trả</label>
+                        <label for="soNgayTra" class="form-label">Ngày Đến Hạn</label>
                         <input type="number" class="form-control" id="soNgayTra" min="0" value="0" />
                     </div>
                     <div class="col-md-6">

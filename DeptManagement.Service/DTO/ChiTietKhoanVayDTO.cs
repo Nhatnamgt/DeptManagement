@@ -18,9 +18,9 @@ namespace DeptManagement.Service.DTO
 
         public decimal SoTienLai { get; set; }
 
-        public decimal? SoTienTraMoiKy { get; set; }
+        public decimal? SoTienTraMoiThang { get; set; }
 
-        public int? SoNgayTra { get; set; }
+        public int? NgayDenHan { get; set; }
 
         public decimal? TongTien { get; set; }
     }
