@@ -9,6 +9,7 @@ namespace DeptManagement.Service.Interface
 {
     public interface QuanLiNapRut
     {
+        Task<TongLaiLoDTO> GetLaiLoAsync();
         Task<List<GetQuanLiNapRutDTO>> GetAllAsync();
         Task<CreateEditQuanLiNapRutDTO> CreateAsync(CreateEditQuanLiNapRutDTO dto);
         Task<CreateEditQuanLiNapRutDTO> UpdateAsync(CreateEditQuanLiNapRutDTO dto);

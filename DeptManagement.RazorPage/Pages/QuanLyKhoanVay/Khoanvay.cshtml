@@ -316,8 +316,8 @@
                         <td>${item.ngayVay}</td>
                         <td>${formatMoney(item.soTienVay)}</td>
                         <td>${formatMoney(item.soTienLai)}</td>
-                        <td>${formatMoney(item.soTienTraMoiKy)}</td>
-                        <td>${item.soNgayTra ?? '-'}</td>
+                        <td>${formatMoney(item.soTienTraMoiThang)}</td>
+                        <td>${item.ngayDenHan ?? '-'}</td>
                         <td>${formatMoney(item.tongTien)}</td>
                         <td class="text-end">
                             <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditChiTiet(${item.id})">Sửa</button>
@@ -369,8 +369,8 @@
             document.getElementById('ngayVay').value = item.ngayVay;
             document.getElementById('soTienVay').value = item.soTienVay;
             document.getElementById('soTienLai').value = item.soTienLai;
-            document.getElementById('soTienTraMoiKy').value = item.soTienTraMoiKy || 0;
-            document.getElementById('soNgayTra').value = item.soNgayTra || 0;
+            document.getElementById('soTienTraMoiKy').value = item.soTienTraMoiThang || 0;
+            document.getElementById('soNgayTra').value = item.ngayDenHan || 0;
             document.getElementById('tongTien').value = item.tongTien || 0;
             document.getElementById('chiTietModalTitle').textContent = 'Sửa chi tiết khoản vay';
             chiTietModal.show();
@@ -392,8 +392,8 @@
                 ngayVay: ngayVay,
                 soTienVay: parseFloat(document.getElementById('soTienVay').value) || 0,
                 soTienLai: parseFloat(document.getElementById('soTienLai').value) || 0,
-                soTienTraMoiKy: parseFloat(document.getElementById('soTienTraMoiKy').value) || 0,
-                soNgayTra: parseInt(document.getElementById('soNgayTra').value, 10) || 0,
+                soTienTraMoiThang: parseFloat(document.getElementById('soTienTraMoiKy').value) || 0,
+                ngayDenHan: parseInt(document.getElementById('soNgayTra').value, 10) || 0,
                 tongTien: parseFloat(document.getElementById('tongTien').value) || 0
             };
 

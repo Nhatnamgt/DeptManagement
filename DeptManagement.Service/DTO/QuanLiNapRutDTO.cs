@@ -35,4 +35,14 @@ namespace DeptManagement.Service.DTO
         public decimal? LaiLo { get; set; }
     }
 
+    public class TongLaiLoDTO
+    {
+        public decimal TongTienNap { get; set; }
+
+        public decimal TongTienRut { get; set; }
+
+        public decimal SoTienLaiLo { get; set; }
+
+    }
+
 }

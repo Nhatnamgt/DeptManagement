@@ -15,6 +15,13 @@ namespace DeptManagement.Controllers
             _service = service;
         }
 
+        [HttpGet("tong-lai-lo")]
+        public async Task<IActionResult> GetTongLaiLo()
+        {
+            var result = await _service.GetLaiLoAsync();
+            return Ok(result);
+        }
+
         // GET: api/QuanLiNapRut
         [HttpGet]
         public async Task<IActionResult> GetAll()

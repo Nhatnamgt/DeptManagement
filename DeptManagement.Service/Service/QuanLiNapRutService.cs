@@ -85,5 +85,17 @@ namespace DeptManagement.Service.Service
 
             return true;
         }
+
+        public async Task<TongLaiLoDTO> GetLaiLoAsync()
+        {
+            var data = await _unitOfWork.QuanLyNapRutRepository.GetAllAsync();
+
+            return new TongLaiLoDTO
+            {
+                TongTienNap = data.Sum(x => x.Sotiennap),
+                TongTienRut = data.Sum(x => x.Sotienrut),
+                SoTienLaiLo = data.Sum(x => x.Lailo ??0)
+            };
+        }
     }
 }
