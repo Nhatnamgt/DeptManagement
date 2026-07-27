@@ -21,5 +21,7 @@ public partial class Chitietkhoanvay
 
     public decimal? Tongtien { get; set; }
 
+    public string? Ghichu { get; set; }
+
     public virtual Quanlykhoanno Khoanno { get; set; } = null!;
 }

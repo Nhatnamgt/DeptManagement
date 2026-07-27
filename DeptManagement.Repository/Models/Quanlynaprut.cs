@@ -16,4 +16,6 @@ public partial class Quanlynaprut
     public decimal Sotienrut { get; set; }
 
     public decimal? Lailo { get; set; }
+
+    public string? Ghichu { get; set; }
 }

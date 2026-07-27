@@ -23,6 +23,8 @@ namespace DeptManagement.Service.DTO
         public int? NgayDenHan { get; set; }
 
         public decimal? TongTien { get; set; }
+
+        public string? GhiChu { get; set; }
     }
     public class TongKhoanVayDTO
     {

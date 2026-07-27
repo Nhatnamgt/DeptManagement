@@ -19,6 +19,8 @@ namespace DeptManagement.Service.DTO
         public decimal SoTienRut { get; set; }
 
         public decimal? LaiLo { get; set; }
+
+        public string? GhiChu { get; set; }
     }
     public class CreateEditQuanLiNapRutDTO
     {
@@ -33,6 +35,8 @@ namespace DeptManagement.Service.DTO
         public decimal SoTienRut { get; set; }
 
         public decimal? LaiLo { get; set; }
+
+        public string? GhiChu { get; set; }
     }
 
     public class TongLaiLoDTO

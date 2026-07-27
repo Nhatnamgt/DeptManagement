@@ -1,32 +1,43 @@
-﻿ @page
+﻿@page
 @model DeptManagement.RazorPage.Pages.QuanLyKhoanVay.IndexModel
 @{
     ViewData["Title"] = "Quản lý khoản vay";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">Quản lý khoản vay</h2>
-    <button type="button" class="btn btn-primary" id="btnAddKhoanNo">+ Thêm khoản nợ</button>
+<div class="page-header d-flex flex-wrap justify-content-between align-items-start gap-3">
+    <div>
+        <h1>Quản lý khoản vay</h1>
+        <p>Quản lý khoản nợ và chi tiết từng khoản vay</p>
+    </div>
+    <button type="button" class="btn btn-primary" id="btnAddKhoanNo">
+        <i class="bi bi-plus-lg me-1"></i> Thêm khoản nợ
+    </button>
 </div>
 
 <div id="alertBox"></div>
 
-<div class="card mb-4">
-    <div class="card-header fw-semibold">Danh sách khoản nợ</div>
-    <div class="card-body p-0">
+<div class="content-card mb-4">
+    <div class="card-header d-flex align-items-center gap-2">
+        <i class="bi bi-folder2-open text-primary"></i>
+        Danh sách khoản nợ
+    </div>
+    <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped table-hover align-middle mb-0">
-                <thead class="table-dark">
+            <table class="table data-table align-middle">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Tên khoản nợ</th>
                         <th>Ghi chú</th>
-                        <th class="text-end" style="width: 220px;">Thao tác</th>
+                        <th class="text-end" style="width: 200px;">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody id="khoanNoTableBody">
                     <tr>
-                        <td colspan="4" class="text-center text-muted py-4">Đang tải dữ liệu...</td>
+                        <td colspan="4" class="empty-state text-center">
+                            <i class="bi bi-hourglass-split"></i>
+                            Đang tải dữ liệu...
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -34,50 +45,53 @@
     </div>
 </div>
 
-<div class="card d-none" id="chiTietSection">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <span class="fw-semibold">Chi tiết khoản vay: <span id="selectedKhoanNoName" class="text-primary"></span></span>
-        <button type="button" class="btn btn-sm btn-primary" id="btnAddChiTiet">+ Thêm chi tiết</button>
+<div class="content-card d-none" id="chiTietSection">
+    <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span class="d-flex align-items-center gap-2">
+            <i class="bi bi-receipt text-primary"></i>
+            Chi tiết khoản vay:
+            <strong id="selectedKhoanNoName" class="text-primary"></strong>
+        </span>
+        <button type="button" class="btn btn-sm btn-primary" id="btnAddChiTiet">
+            <i class="bi bi-plus-lg me-1"></i> Thêm chi tiết
+        </button>
     </div>
-    <div class="card-body">
-        <div class="row g-3 mb-4" id="thongKeBox">
-            <div class="col-md-4">
-                <div class="border rounded p-3 bg-light">
-                    <div class="text-muted small">Tổng tiền vay</div>
-                    <div class="fs-5 fw-semibold" id="tongTienVay">0</div>
-                </div>
+    <div class="card-body p-3">
+        <div class="stat-grid" id="thongKeBox">
+            <div class="stat-card stat-primary">
+                <div class="stat-label">Tổng tiền vay</div>
+                <div class="stat-value" id="tongTienVay">0</div>
             </div>
-            <div class="col-md-4">
-                <div class="border rounded p-3 bg-light">
-                    <div class="text-muted small">Tổng tiền lãi</div>
-                    <div class="fs-5 fw-semibold" id="tongTienLai">0</div>
-                </div>
+            <div class="stat-card">
+                <div class="stat-label">Tổng tiền lãi</div>
+                <div class="stat-value" id="tongTienLai">0</div>
             </div>
-            <div class="col-md-4">
-                <div class="border rounded p-3 bg-light">
-                    <div class="text-muted small">Tổng tiền phải trả</div>
-                    <div class="fs-5 fw-semibold text-danger" id="tongTienPhaiTra">0</div>
-                </div>
+            <div class="stat-card stat-danger">
+                <div class="stat-label">Tổng tiền phải trả</div>
+                <div class="stat-value" id="tongTienPhaiTra">0</div>
             </div>
         </div>
 
         <div class="table-responsive">
-            <table class="table table-bordered align-middle">
-                <thead class="table-secondary">
+            <table class="table data-table align-middle">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Ngày vay</th>
                         <th>Số tiền vay</th>
                         <th>Số tiền lãi</th>
-                        <th>Số tiền trả mỗi tháng</th>
-                        <th>Ngày Đến Hạn</th>
+                        <th>Trả mỗi tháng</th>
+                        <th>Ngày đến hạn</th>
                         <th>Tổng tiền</th>
-                        <th class="text-end" style="width: 140px;">Thao tác</th>
+                        <th>Ghi chú</th>
+                        <th class="text-end" style="width: 120px;">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody id="chiTietTableBody">
                     <tr>
-                        <td colspan="8" class="text-center text-muted py-3">Chọn khoản nợ để xem chi tiết</td>
+                        <td colspan="9" class="empty-state text-center">
+                            Chọn khoản nợ để xem chi tiết
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -86,7 +100,7 @@
 </div>
 
 <div class="modal fade" id="khoanNoModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="khoanNoModalTitle">Thêm khoản nợ</h5>
@@ -95,24 +109,26 @@
             <div class="modal-body">
                 <input type="hidden" id="khoanNoId" value="0" />
                 <div class="mb-3">
-                    <label for="tenKhoanNo" class="form-label">Tên khoản nợ</label>
-                    <input type="text" class="form-control" id="tenKhoanNo" required />
+                    <label for="tenKhoanNo" class="form-label">Tên khoản nợ <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="tenKhoanNo" required placeholder="VD: Vay ngân hàng ABC" />
                 </div>
-                <div class="mb-3">
-                    <label for="ghiChu" class="form-label">Ghi chú</label>
-                    <textarea class="form-control" id="ghiChu" rows="3"></textarea>
+                <div class="mb-0">
+                    <label for="ghiChuKhoanNo" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" id="ghiChuKhoanNo" rows="3" placeholder="Ghi chú về khoản nợ (tuỳ chọn)"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="btnSaveKhoanNo">Lưu</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="btnSaveKhoanNo">
+                    <i class="bi bi-check-lg me-1"></i> Lưu
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="chiTietModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="chiTietModalTitle">Thêm chi tiết khoản vay</h5>
@@ -123,7 +139,7 @@
                 <input type="hidden" id="chiTietKhoanNoId" value="0" />
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="ngayVay" class="form-label">Ngày vay</label>
+                        <label for="ngayVay" class="form-label">Ngày vay <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" id="ngayVay" required />
                     </div>
                     <div class="col-md-6">
@@ -139,18 +155,24 @@
                         <input type="number" class="form-control" id="soTienTraMoiKy" min="0" step="1000" value="0" />
                     </div>
                     <div class="col-md-6">
-                        <label for="soNgayTra" class="form-label">Ngày Đến Hạn</label>
+                        <label for="soNgayTra" class="form-label">Ngày đến hạn</label>
                         <input type="number" class="form-control" id="soNgayTra" min="0" value="0" />
                     </div>
                     <div class="col-md-6">
                         <label for="tongTien" class="form-label">Tổng tiền</label>
                         <input type="number" class="form-control" id="tongTien" min="0" step="1000" value="0" />
                     </div>
+                    <div class="col-12">
+                        <label for="ghiChuChiTiet" class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="ghiChuChiTiet" rows="3" placeholder="Ghi chú cho khoản vay này (tuỳ chọn)"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChiTiet">Lưu</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChiTiet">
+                    <i class="bi bi-check-lg me-1"></i> Lưu
+                </button>
             </div>
         </div>
     </div>
@@ -168,18 +190,7 @@
 
         const khoanNoModal = new bootstrap.Modal(document.getElementById('khoanNoModal'));
         const chiTietModal = new bootstrap.Modal(document.getElementById('chiTietModal'));
-
-        function showAlert(message, type = 'success') {
-            document.getElementById('alertBox').innerHTML =
-                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>`;
-        }
-
-        function formatMoney(value) {
-            return Number(value || 0).toLocaleString('vi-VN');
-        }
+        const { formatMoney, formatDate, formatNote, showAlert, escapeHtml } = AppUtils;
 
         async function loadKhoanNo() {
             const tbody = document.getElementById('khoanNoTableBody');
@@ -189,31 +200,40 @@
                 khoanNoList = await response.json();
 
                 if (!khoanNoList.length) {
-                    tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-4">Chưa có khoản nợ nào</td></tr>';
+                    tbody.innerHTML = `<tr><td colspan="4" class="empty-state text-center">
+                        <i class="bi bi-inbox"></i>Chưa có khoản nợ nào</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = khoanNoList.map(item => `
-                    <tr class="${selectedKhoanNoId === item.id ? 'table-primary' : ''}">
-                        <td>${item.id}</td>
-                        <td>${item.tenKhoanNo}</td>
-                        <td>${item.ghiChu || '-'}</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-info me-1" onclick="viewChiTiet(${item.id}, '${item.tenKhoanNo.replace(/'/g, "\\'")}')">Chi tiết</button>
-                            <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditKhoanNo(${item.id})">Sửa</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteKhoanNo(${item.id})">Xóa</button>
+                    <tr class="${selectedKhoanNoId === item.id ? 'table-active' : ''}">
+                        <td><span class="text-muted">#${item.id}</span></td>
+                        <td class="fw-semibold">${escapeHtml(item.tenKhoanNo)}</td>
+                        <td>${formatNote(item.ghiChu)}</td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn btn-sm btn-outline-info btn-action" onclick="viewChiTiet(${item.id})" title="Xem chi tiết">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-primary btn-action" onclick="openEditKhoanNo(${item.id})" title="Sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-action" onclick="deleteKhoanNo(${item.id})" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `).join('');
             } catch (error) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center text-danger py-4">${error.message}</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="empty-state text-center text-danger">${error.message}</td></tr>`;
             }
         }
 
         function resetKhoanNoForm() {
             document.getElementById('khoanNoId').value = '0';
             document.getElementById('tenKhoanNo').value = '';
-            document.getElementById('ghiChu').value = '';
+            document.getElementById('ghiChuKhoanNo').value = '';
             document.getElementById('khoanNoModalTitle').textContent = 'Thêm khoản nợ';
         }
 
@@ -228,7 +248,7 @@
 
             document.getElementById('khoanNoId').value = item.id;
             document.getElementById('tenKhoanNo').value = item.tenKhoanNo;
-            document.getElementById('ghiChu').value = item.ghiChu || '';
+            document.getElementById('ghiChuKhoanNo').value = item.ghiChu || '';
             document.getElementById('khoanNoModalTitle').textContent = 'Sửa khoản nợ';
             khoanNoModal.show();
         }
@@ -237,14 +257,14 @@
             const id = parseInt(document.getElementById('khoanNoId').value, 10);
             const tenKhoanNo = document.getElementById('tenKhoanNo').value.trim();
             if (!tenKhoanNo) {
-                showAlert('Vui lòng nhập tên khoản nợ', 'warning');
+                showAlert('alertBox', 'Vui lòng nhập tên khoản nợ', 'warning');
                 return;
             }
 
             const payload = {
                 id: id,
                 tenKhoanNo: tenKhoanNo,
-                ghiChu: document.getElementById('ghiChu').value.trim()
+                ghiChu: document.getElementById('ghiChuKhoanNo').value.trim() || null
             };
 
             const isEdit = id > 0;
@@ -258,10 +278,10 @@
                 if (!response.ok) throw new Error('Lưu khoản nợ thất bại');
 
                 khoanNoModal.hide();
-                showAlert(isEdit ? 'Cập nhật khoản nợ thành công' : 'Thêm khoản nợ thành công');
+                showAlert('alertBox', isEdit ? 'Cập nhật khoản nợ thành công' : 'Thêm khoản nợ thành công');
                 await loadKhoanNo();
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         });
 
@@ -277,10 +297,10 @@
                     document.getElementById('chiTietSection').classList.add('d-none');
                 }
 
-                showAlert('Xóa khoản nợ thành công');
+                showAlert('alertBox', 'Xóa khoản nợ thành công');
                 await loadKhoanNo();
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         }
 
@@ -294,7 +314,7 @@
                 document.getElementById('tongTienLai').textContent = formatMoney(stats.tongTienLai);
                 document.getElementById('tongTienPhaiTra').textContent = formatMoney(stats.tongTienPhaiTra);
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         }
 
@@ -306,34 +326,44 @@
                 chiTietList = await response.json();
 
                 if (!chiTietList.length) {
-                    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-3">Chưa có chi tiết khoản vay</td></tr>';
+                    tbody.innerHTML = `<tr><td colspan="9" class="empty-state text-center">
+                        <i class="bi bi-inbox"></i>Chưa có chi tiết khoản vay</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = chiTietList.map(item => `
                     <tr>
-                        <td>${item.id}</td>
-                        <td>${item.ngayVay}</td>
-                        <td>${formatMoney(item.soTienVay)}</td>
-                        <td>${formatMoney(item.soTienLai)}</td>
-                        <td>${formatMoney(item.soTienTraMoiThang)}</td>
-                        <td>${item.ngayDenHan ?? '-'}</td>
-                        <td>${formatMoney(item.tongTien)}</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditChiTiet(${item.id})">Sửa</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteChiTiet(${item.id})">Xóa</button>
+                        <td><span class="text-muted">#${item.id}</span></td>
+                        <td>${formatDate(item.ngayVay)}</td>
+                        <td class="money-cell">${formatMoney(item.soTienVay)}</td>
+                        <td class="money-cell">${formatMoney(item.soTienLai)}</td>
+                        <td class="money-cell">${formatMoney(item.soTienTraMoiThang)}</td>
+                        <td>${item.ngayDenHan ?? '<span class="text-muted">—</span>'}</td>
+                        <td class="money-cell fw-semibold">${formatMoney(item.tongTien)}</td>
+                        <td>${formatNote(item.ghiChu)}</td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn btn-sm btn-outline-primary btn-action" onclick="openEditChiTiet(${item.id})" title="Sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-action" onclick="deleteChiTiet(${item.id})" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `).join('');
             } catch (error) {
-                tbody.innerHTML = `<tr><td colspan="8" class="text-center text-danger py-3">${error.message}</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="9" class="empty-state text-center text-danger">${error.message}</td></tr>`;
             }
         }
 
-        async function viewChiTiet(khoanNoId, tenKhoanNo) {
+        async function viewChiTiet(khoanNoId) {
+            const item = khoanNoList.find(x => x.id === khoanNoId);
             selectedKhoanNoId = khoanNoId;
-            document.getElementById('selectedKhoanNoName').textContent = tenKhoanNo;
+            document.getElementById('selectedKhoanNoName').textContent = item ? item.tenKhoanNo : '';
             document.getElementById('chiTietSection').classList.remove('d-none');
+            document.getElementById('chiTietSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
             await loadKhoanNo();
             await loadThongKe(khoanNoId);
             await loadChiTiet(khoanNoId);
@@ -348,12 +378,13 @@
             document.getElementById('soTienTraMoiKy').value = '0';
             document.getElementById('soNgayTra').value = '0';
             document.getElementById('tongTien').value = '0';
+            document.getElementById('ghiChuChiTiet').value = '';
             document.getElementById('chiTietModalTitle').textContent = 'Thêm chi tiết khoản vay';
         }
 
         document.getElementById('btnAddChiTiet').addEventListener('click', () => {
             if (!selectedKhoanNoId) {
-                showAlert('Vui lòng chọn khoản nợ trước', 'warning');
+                showAlert('alertBox', 'Vui lòng chọn khoản nợ trước', 'warning');
                 return;
             }
             resetChiTietForm();
@@ -372,6 +403,7 @@
             document.getElementById('soTienTraMoiKy').value = item.soTienTraMoiThang || 0;
             document.getElementById('soNgayTra').value = item.ngayDenHan || 0;
             document.getElementById('tongTien').value = item.tongTien || 0;
+            document.getElementById('ghiChuChiTiet').value = item.ghiChu || '';
             document.getElementById('chiTietModalTitle').textContent = 'Sửa chi tiết khoản vay';
             chiTietModal.show();
         }
@@ -382,7 +414,7 @@
             const ngayVay = document.getElementById('ngayVay').value;
 
             if (!ngayVay) {
-                showAlert('Vui lòng chọn ngày vay', 'warning');
+                showAlert('alertBox', 'Vui lòng chọn ngày vay', 'warning');
                 return;
             }
 
@@ -394,7 +426,8 @@
                 soTienLai: parseFloat(document.getElementById('soTienLai').value) || 0,
                 soTienTraMoiThang: parseFloat(document.getElementById('soTienTraMoiKy').value) || 0,
                 ngayDenHan: parseInt(document.getElementById('soNgayTra').value, 10) || 0,
-                tongTien: parseFloat(document.getElementById('tongTien').value) || 0
+                tongTien: parseFloat(document.getElementById('tongTien').value) || 0,
+                ghiChu: document.getElementById('ghiChuChiTiet').value.trim() || null
             };
 
             const isEdit = id > 0;
@@ -408,11 +441,11 @@
                 if (!response.ok) throw new Error('Lưu chi tiết thất bại');
 
                 chiTietModal.hide();
-                showAlert(isEdit ? 'Cập nhật chi tiết thành công' : 'Thêm chi tiết thành công');
+                showAlert('alertBox', isEdit ? 'Cập nhật chi tiết thành công' : 'Thêm chi tiết thành công');
                 await loadThongKe(khoanNoId);
                 await loadChiTiet(khoanNoId);
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         });
 
@@ -423,11 +456,11 @@
                 const response = await fetch(`${CHI_TIET_URL}/${id}`, { method: 'DELETE' });
                 if (!response.ok) throw new Error('Xóa chi tiết thất bại');
 
-                showAlert('Xóa chi tiết thành công');
+                showAlert('alertBox', 'Xóa chi tiết thành công');
                 await loadThongKe(selectedKhoanNoId);
                 await loadChiTiet(selectedKhoanNoId);
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         }
 

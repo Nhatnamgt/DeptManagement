@@ -4,86 +4,104 @@
     ViewData["Title"] = "Quản lý nạp rút";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">Quản lý nạp rút</h2>
+<div class="page-header d-flex flex-wrap justify-content-between align-items-start gap-3">
+    <div>
+        <h1>Quản lý nạp rút</h1>
+        <p>Theo dõi giao dịch nạp, rút và lãi/lỗ</p>
+    </div>
     <button type="button" class="btn btn-primary" id="btnAdd">
-        <span>+ Thêm giao dịch</span>
+        <i class="bi bi-plus-lg me-1"></i> Thêm giao dịch
     </button>
 </div>
 
 <div id="alertBox"></div>
 
-<div class="row g-3 mb-4">
-    <div class="col-md-4">
-        <div class="border rounded p-3 bg-light">
-            <div class="text-muted small">Tổng tiền nạp</div>
-            <div class="fs-5 fw-semibold" id="tongTienNap">0</div>
-        </div>
+<div class="stat-grid">
+    <div class="stat-card stat-success">
+        <div class="stat-label">Tổng tiền nạp</div>
+        <div class="stat-value" id="tongTienNap">0</div>
     </div>
-    <div class="col-md-4">
-        <div class="border rounded p-3 bg-light">
-            <div class="text-muted small">Tổng tiền rút</div>
-            <div class="fs-5 fw-semibold" id="tongTienRut">0</div>
-        </div>
+    <div class="stat-card stat-danger">
+        <div class="stat-label">Tổng tiền rút</div>
+        <div class="stat-value" id="tongTienRut">0</div>
     </div>
-    <div class="col-md-4">
-        <div class="border rounded p-3 bg-light">
-            <div class="text-muted small">Tổng lãi/lỗ</div>
-            <div class="fs-5 fw-semibold" id="soTienLaiLo">0</div>
-        </div>
+    <div class="stat-card stat-primary" id="laiLoCard">
+        <div class="stat-label">Tổng lãi/lỗ</div>
+        <div class="stat-value" id="soTienLaiLo">0</div>
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Ngày nạp</th>
-                <th>Số tiền nạp</th>
-                <th>Ngày rút</th>
-                <th>Số tiền rút</th>
-                <th>Lãi/Lỗ</th>
-                <th class="text-end" style="width: 160px;">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <tr>
-                <td colspan="7" class="text-center text-muted py-4">Đang tải dữ liệu...</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="content-card">
+    <div class="card-header d-flex align-items-center gap-2">
+        <i class="bi bi-list-ul text-primary"></i>
+        Danh sách giao dịch
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table data-table align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ngày nạp</th>
+                        <th>Số tiền nạp</th>
+                        <th>Ngày rút</th>
+                        <th>Số tiền rút</th>
+                        <th>Lãi/Lỗ</th>
+                        <th>Ghi chú</th>
+                        <th class="text-end" style="width: 150px;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="8" class="empty-state text-center">
+                            <i class="bi bi-hourglass-split"></i>
+                            Đang tải dữ liệu...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="formModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle">Thêm giao dịch</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="itemId" value="0" />
-                <div class="mb-3">
-                    <label for="ngayNap" class="form-label">Ngày nạp</label>
-                    <input type="date" class="form-control" id="ngayNap" />
-                </div>
-                <div class="mb-3">
-                    <label for="soTienNap" class="form-label">Số tiền nạp</label>
-                    <input type="number" class="form-control" id="soTienNap" min="0" step="1000" value="0" />
-                </div>
-                <div class="mb-3">
-                    <label for="ngayRut" class="form-label">Ngày rút</label>
-                    <input type="date" class="form-control" id="ngayRut" />
-                </div>
-                <div class="mb-3">
-                    <label for="soTienRut" class="form-label">Số tiền rút</label>
-                    <input type="number" class="form-control" id="soTienRut" min="0" step="1000" value="0" />
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="ngayNap" class="form-label">Ngày nạp</label>
+                        <input type="date" class="form-control" id="ngayNap" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="soTienNap" class="form-label">Số tiền nạp</label>
+                        <input type="number" class="form-control" id="soTienNap" min="0" step="1000" value="0" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="ngayRut" class="form-label">Ngày rút</label>
+                        <input type="date" class="form-control" id="ngayRut" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="soTienRut" class="form-label">Số tiền rút</label>
+                        <input type="number" class="form-control" id="soTienRut" min="0" step="1000" value="0" />
+                    </div>
+                    <div class="col-12">
+                        <label for="ghiChu" class="form-label">Ghi chú</label>
+                        <textarea class="form-control" id="ghiChu" rows="3" placeholder="Nhập ghi chú cho giao dịch (tuỳ chọn)"></textarea>
+                        <div class="form-text form-text-hint">Ví dụ: nguồn tiền, mục đích sử dụng...</div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary" id="btnSave">Lưu</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" id="btnSave">
+                    <i class="bi bi-check-lg me-1"></i> Lưu
+                </button>
             </div>
         </div>
     </div>
@@ -94,23 +112,7 @@
         const API_BASE = '@Model.ApiBaseUrl';
         const API_URL = `${API_BASE}/QuanLiNapRut`;
         const formModal = new bootstrap.Modal(document.getElementById('formModal'));
-
-        function showAlert(message, type = 'success') {
-            document.getElementById('alertBox').innerHTML =
-                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>`;
-        }
-
-        function formatMoney(value) {
-            return Number(value || 0).toLocaleString('vi-VN');
-        }
-
-        function formatDate(value) {
-            if (!value) return '-';
-            return value;
-        }
+        const { formatMoney, formatDate, formatNote, showAlert } = AppUtils;
 
         async function loadTongLaiLo() {
             const response = await fetch(`${API_URL}/tong-lai-lo`);
@@ -121,9 +123,10 @@
             document.getElementById('tongTienRut').textContent = formatMoney(data.tongTienRut);
 
             const laiLoElement = document.getElementById('soTienLaiLo');
+            const laiLoCard = document.getElementById('laiLoCard');
             laiLoElement.textContent = formatMoney(data.soTienLaiLo);
-            laiLoElement.classList.toggle('text-success', data.soTienLaiLo >= 0);
-            laiLoElement.classList.toggle('text-danger', data.soTienLaiLo < 0);
+            laiLoCard.classList.remove('stat-success', 'stat-danger', 'stat-primary');
+            laiLoCard.classList.add(data.soTienLaiLo >= 0 ? 'stat-success' : 'stat-danger');
         }
 
         async function loadData() {
@@ -134,26 +137,34 @@
                 const data = await response.json();
 
                 if (!data.length) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Chưa có giao dịch nào</td></tr>';
+                    tbody.innerHTML = `<tr><td colspan="8" class="empty-state text-center">
+                        <i class="bi bi-inbox"></i>Chưa có giao dịch nào</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = data.map(item => `
                     <tr>
-                        <td>${item.id}</td>
+                        <td><span class="text-muted">#${item.id}</span></td>
                         <td>${formatDate(item.ngayNap)}</td>
-                        <td>${formatMoney(item.soTienNap)}</td>
+                        <td class="money-cell text-success">${formatMoney(item.soTienNap)}</td>
                         <td>${formatDate(item.ngayRut)}</td>
-                        <td>${formatMoney(item.soTienRut)}</td>
-                        <td class="${item.laiLo >= 0 ? 'text-success' : 'text-danger'}">${formatMoney(item.laiLo)}</td>
-                        <td class="text-end">
-                            <button class="btn btn-sm btn-outline-primary me-1" onclick="openEdit(${item.id})">Sửa</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteItem(${item.id})">Xóa</button>
+                        <td class="money-cell text-danger">${formatMoney(item.soTienRut)}</td>
+                        <td class="money-cell ${item.laiLo >= 0 ? 'text-success' : 'text-danger'}">${formatMoney(item.laiLo)}</td>
+                        <td>${formatNote(item.ghiChu)}</td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn btn-sm btn-outline-primary btn-action" onclick="openEdit(${item.id})" title="Sửa">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-action" onclick="deleteItem(${item.id})" title="Xóa">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `).join('');
             } catch (error) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center text-danger py-4">${error.message}</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="empty-state text-center text-danger">${error.message}</td></tr>`;
             }
         }
 
@@ -163,6 +174,7 @@
             document.getElementById('soTienNap').value = '0';
             document.getElementById('ngayRut').value = '';
             document.getElementById('soTienRut').value = '0';
+            document.getElementById('ghiChu').value = '';
             document.getElementById('modalTitle').textContent = 'Thêm giao dịch';
         }
 
@@ -184,10 +196,11 @@
                 document.getElementById('soTienNap').value = item.soTienNap;
                 document.getElementById('ngayRut').value = item.ngayRut || '';
                 document.getElementById('soTienRut').value = item.soTienRut;
+                document.getElementById('ghiChu').value = item.ghiChu || '';
                 document.getElementById('modalTitle').textContent = 'Sửa giao dịch';
                 formModal.show();
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         }
 
@@ -199,10 +212,13 @@
                 soTienNap: parseFloat(document.getElementById('soTienNap').value) || 0,
                 ngayRut: document.getElementById('ngayRut').value || null,
                 soTienRut: parseFloat(document.getElementById('soTienRut').value) || 0,
-                laiLo: 0
+                laiLo: 0,
+                ghiChu: document.getElementById('ghiChu').value.trim() || null
             };
 
             const isEdit = id > 0;
+            const btnSave = document.getElementById('btnSave');
+            btnSave.disabled = true;
             try {
                 const response = await fetch(API_URL, {
                     method: isEdit ? 'PUT' : 'POST',
@@ -216,11 +232,13 @@
                 }
 
                 formModal.hide();
-                showAlert(isEdit ? 'Cập nhật thành công' : 'Thêm mới thành công');
+                showAlert('alertBox', isEdit ? 'Cập nhật thành công' : 'Thêm mới thành công');
                 await loadData();
                 await loadTongLaiLo();
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
+            } finally {
+                btnSave.disabled = false;
             }
         });
 
@@ -230,15 +248,15 @@
             try {
                 const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
                 if (!response.ok) throw new Error('Xóa thất bại');
-                showAlert('Xóa thành công');
+                showAlert('alertBox', 'Xóa thành công');
                 await loadData();
                 await loadTongLaiLo();
             } catch (error) {
-                showAlert(error.message, 'danger');
+                showAlert('alertBox', error.message, 'danger');
             }
         }
 
         loadData();
-        loadTongLaiLo().catch(error => showAlert(error.message, 'danger'));
+        loadTongLaiLo().catch(error => showAlert('alertBox', error.message, 'danger'));
     </script>
 }

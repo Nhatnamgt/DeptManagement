@@ -30,7 +30,8 @@ namespace DeptManagement.Service.Service
                 SoTienNap = x.Sotiennap,
                 NgayRut = x.Ngayrut,
                 SoTienRut = x.Sotienrut,
-                LaiLo = x.Lailo
+                LaiLo = x.Lailo,
+                GhiChu = x.Ghichu
             }).ToList();
         }
 
@@ -41,7 +42,8 @@ namespace DeptManagement.Service.Service
                 Ngaynap = dto.NgayNap,
                 Sotiennap = dto.SoTienNap,
                 Ngayrut = dto.NgayRut,
-                Sotienrut = dto.SoTienRut
+                Sotienrut = dto.SoTienRut,
+                Ghichu = dto.GhiChu
             };
 
             await _unitOfWork.QuanLyNapRutRepository.AddAsync(entity);
@@ -64,6 +66,7 @@ namespace DeptManagement.Service.Service
             entity.Sotiennap = dto.SoTienNap;
             entity.Ngayrut = dto.NgayRut;
             entity.Sotienrut = dto.SoTienRut;
+            entity.Ghichu = dto.GhiChu;
 
             await _unitOfWork.QuanLyNapRutRepository.UpdateAsync(entity);
             await _unitOfWork.SaveAsync();
@@ -94,7 +97,7 @@ namespace DeptManagement.Service.Service
             {
                 TongTienNap = data.Sum(x => x.Sotiennap),
                 TongTienRut = data.Sum(x => x.Sotienrut),
-                SoTienLaiLo = data.Sum(x => x.Lailo ??0)
+                SoTienLaiLo = data.Sum(x => x.Lailo ?? 0)
             };
         }
     }

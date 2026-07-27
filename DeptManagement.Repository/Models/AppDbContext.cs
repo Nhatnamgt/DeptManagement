@@ -21,6 +21,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Quanlynaprut> Quanlynapruts { get; set; }
 
+   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Chitietkhoanvay>(entity =>
@@ -29,7 +30,10 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("chitietkhoanvay");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.Ghichu).HasColumnName("ghichu");
             entity.Property(e => e.Khoannoid).HasColumnName("khoannoid");
             entity.Property(e => e.Ngayvay).HasColumnName("ngayvay");
             entity.Property(e => e.Songaytra).HasColumnName("songaytra");
@@ -58,7 +62,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("quanlykhoanno");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
             entity.Property(e => e.Ghichu).HasColumnName("ghichu");
             entity.Property(e => e.Nguoichovay)
                 .HasMaxLength(255)
@@ -74,7 +80,10 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("quanlynaprut");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.Ghichu).HasColumnName("ghichu");
             entity.Property(e => e.Lailo)
                 .HasPrecision(18, 2)
                 .HasComputedColumnSql("(sotienrut - sotiennap)", true)
