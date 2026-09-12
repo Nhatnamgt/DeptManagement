@@ -331,7 +331,13 @@
                     return;
                 }
 
-                tbody.innerHTML = chiTietList.map(item => `
+                const sortedChiTietList = [...chiTietList].sort((a, b) => {
+                    const dateA = new Date(a.ngayVay || '9999-12-31').getTime();
+                    const dateB = new Date(b.ngayVay || '9999-12-31').getTime();
+                    return dateA - dateB || a.id - b.id;
+                });
+
+                tbody.innerHTML = sortedChiTietList.map(item => `
                     <tr>
                         <td><span class="text-muted">#${item.id}</span></td>
                         <td>${formatDate(item.ngayVay)}</td>

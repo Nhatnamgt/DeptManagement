@@ -142,7 +142,13 @@
                     return;
                 }
 
-                tbody.innerHTML = data.map(item => `
+                const sortedData = [...data].sort((a, b) => {
+                    const dateA = new Date(a.ngayNap || a.ngayRut || '9999-12-31').getTime();
+                    const dateB = new Date(b.ngayNap || b.ngayRut || '9999-12-31').getTime();
+                    return dateA - dateB || a.id - b.id;
+                });
+
+                tbody.innerHTML = sortedData.map(item => `
                     <tr>
                         <td><span class="text-muted">#${item.id}</span></td>
                         <td>${formatDate(item.ngayNap)}</td>
