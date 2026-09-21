@@ -11,6 +11,7 @@ namespace DeptManagement.Service.Interface
     {
         Task<TongLaiLoDTO> GetLaiLoAsync();
         Task<List<GetQuanLiNapRutDTO>> GetAllAsync();
+        Task<GetQuanLiNapRutDTO?> GetByIdAsync(int id);
         Task<CreateEditQuanLiNapRutDTO> CreateAsync(CreateEditQuanLiNapRutDTO dto);
         Task<CreateEditQuanLiNapRutDTO> UpdateAsync(CreateEditQuanLiNapRutDTO dto);
         Task<bool> DeleteAsync(int id);

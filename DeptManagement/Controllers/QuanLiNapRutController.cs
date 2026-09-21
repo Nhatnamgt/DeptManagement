@@ -30,6 +30,18 @@ namespace DeptManagement.Controllers
             return Ok(result);
         }
 
+        // GET: api/QuanLiNapRut/5
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if (result == null)
+                return NotFound("Không tìm thấy giao dịch.");
+
+            return Ok(result);
+        }
+
         // POST: api/QuanLiNapRut
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateEditQuanLiNapRutDTO dto)

@@ -23,16 +23,13 @@ namespace DeptManagement.Service.Service
         {
             var entities = await _unitOfWork.QuanLyNapRutRepository.GetAllAsync();
 
-            return entities.Select(x => new GetQuanLiNapRutDTO
-            {
-                Id = x.Id,
-                NgayNap = x.Ngaynap,
-                SoTienNap = x.Sotiennap,
-                NgayRut = x.Ngayrut,
-                SoTienRut = x.Sotienrut,
-                LaiLo = x.Lailo,
-                GhiChu = x.Ghichu
-            }).ToList();
+            return entities.Select(MapToGetDto).ToList();
+        }
+
+        public async Task<GetQuanLiNapRutDTO?> GetByIdAsync(int id)
+        {
+            var entity = await _unitOfWork.QuanLyNapRutRepository.GetByIdAsync(id);
+            return entity == null ? null : MapToGetDto(entity);
         }
 
         public async Task<CreateEditQuanLiNapRutDTO> CreateAsync(CreateEditQuanLiNapRutDTO dto)
@@ -98,6 +95,20 @@ namespace DeptManagement.Service.Service
                 TongTienNap = data.Sum(x => x.Sotiennap),
                 TongTienRut = data.Sum(x => x.Sotienrut),
                 SoTienLaiLo = data.Sum(x => x.Lailo ?? 0)
+            };
+        }
+
+        private static GetQuanLiNapRutDTO MapToGetDto(Quanlynaprut entity)
+        {
+            return new GetQuanLiNapRutDTO
+            {
+                Id = entity.Id,
+                NgayNap = entity.Ngaynap,
+                SoTienNap = entity.Sotiennap,
+                NgayRut = entity.Ngayrut,
+                SoTienRut = entity.Sotienrut,
+                LaiLo = entity.Lailo,
+                GhiChu = entity.Ghichu
             };
         }
     }
